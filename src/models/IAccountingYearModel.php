@@ -29,6 +29,12 @@ interface IAccountingYearModel {
 	public function getYear(DateTime $dateTime): ?AccountingYear;
 
 	/**
+	 * @param int $year
+	 * @return bool
+	 */
+	public function hasYear(int $year): bool;
+
+	/**
 	 * @param AccountingYear $accountingYear
 	 * @throws DriverException
 	 * @return void

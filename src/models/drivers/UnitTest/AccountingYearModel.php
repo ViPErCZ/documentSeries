@@ -74,6 +74,18 @@ final class AccountingYearModel implements IAccountingYearModel {
 	}
 
 	/**
+	 * @param AccountingYear $accountingYear
+	 * @throws DriverException
+	 */
+	public function insertAccountingYear(AccountingYear $accountingYear): void {
+		if ($this->hasYear($accountingYear->getYear())) {
+			throw new DriverException('Duplicate year ' . $accountingYear->getYear() . ' !');
+		}
+
+		$this->accountingYears[] = $accountingYear;
+	}
+
+	/**
 	 * @param int $year
 	 * @return bool
 	 */
@@ -85,18 +97,6 @@ final class AccountingYearModel implements IAccountingYearModel {
 		}
 
 		return false;
-	}
-
-	/**
-	 * @param AccountingYear $accountingYear
-	 * @throws DriverException
-	 */
-	public function insertAccountingYear(AccountingYear $accountingYear): void {
-		if ($this->hasYear($accountingYear->getYear())) {
-			throw new DriverException('Duplicate year ' . $accountingYear->getYear() . ' !');
-		}
-
-		$this->accountingYears[] = $accountingYear;
 	}
 
 }

@@ -92,4 +92,12 @@ final class SeriesOperator implements ISeriesModel, IAccountingYearModel, IGener
 		$this->builder->getAccountingYearModel()->insertAccountingYear($accountingYear);
 	}
 
+	/**
+	 * @param int $year
+	 * @return bool
+	 */
+	public function hasYear(int $year): bool {
+		return $this->builder->getAccountingYearModel()->hasYear($year);
+	}
+
 }
