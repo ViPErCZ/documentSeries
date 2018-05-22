@@ -47,7 +47,7 @@ final class Serie extends Base {
 	/**
 	 * @param int|null $accountingYearId
 	 */
-	public function setAccountingYearId($accountingYearId = null) {
+	public function setAccountingYearId($accountingYearId = null): void {
 		$this->accountingYearId = $accountingYearId;
 	}
 
@@ -61,7 +61,7 @@ final class Serie extends Base {
 	/**
 	 * @param string $documentType
 	 */
-	public function setDocumentType($documentType) {
+	public function setDocumentType($documentType): void {
 		$this->documentType = $documentType;
 	}
 
@@ -75,7 +75,7 @@ final class Serie extends Base {
 	/**
 	 * @param null|string $prefix
 	 */
-	public function setPrefix($prefix) {
+	public function setPrefix($prefix): void {
 		$this->prefix = $prefix;
 	}
 
@@ -89,7 +89,7 @@ final class Serie extends Base {
 	/**
 	 * @param string $mask
 	 */
-	public function setMask($mask) {
+	public function setMask($mask): void {
 		$this->mask = $mask;
 	}
 
@@ -103,7 +103,7 @@ final class Serie extends Base {
 	/**
 	 * @param int $numbers
 	 */
-	public function setNumbers($numbers) {
+	public function setNumbers($numbers): void {
 		$this->numbers = $numbers;
 	}
 
@@ -117,7 +117,7 @@ final class Serie extends Base {
 	/**
 	 * @param int $currentNumber
 	 */
-	public function setCurrentNumber($currentNumber) {
+	public function setCurrentNumber($currentNumber): void {
 		$this->currentNumber = $currentNumber;
 	}
 
@@ -145,7 +145,7 @@ final class Serie extends Base {
 	/**
 	 * @param bool $forRobots
 	 */
-	public function setForRobots($forRobots) {
+	public function setForRobots($forRobots): void {
 		$this->forRobots = $forRobots;
 	}
 
@@ -159,7 +159,7 @@ final class Serie extends Base {
 	/**
 	 * @param DateTime|null $lastUse
 	 */
-	public function setLastUse(DateTime $lastUse = null) {
+	public function setLastUse(DateTime $lastUse = null): void {
 		$this->lastUse = $lastUse;
 	}
 

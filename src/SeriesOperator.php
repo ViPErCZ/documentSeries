@@ -84,4 +84,12 @@ final class SeriesOperator implements ISeriesModel, IAccountingYearModel, IGener
 		return $this->builder->getAccountingYearModel()->getYear($dateTime);
 	}
 
+	/**
+	 * @param AccountingYear $accountingYear
+	 * @throws DriverException
+	 */
+	public function insertAccountingYear(AccountingYear $accountingYear): void {
+		$this->builder->getAccountingYearModel()->insertAccountingYear($accountingYear);
+	}
+
 }

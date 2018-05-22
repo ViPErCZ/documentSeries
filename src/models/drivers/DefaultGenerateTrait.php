@@ -24,24 +24,13 @@ trait DefaultGenerateTrait {
 	 * @param DateTime $now
 	 */
 	private function prepareNumber(Serie $serie, DateTime $now): void {
-		if ($serie->getLastUse() !== null) {
-			if ($serie->getResetBy() === 'Y') {
-				if ($now->format('Y') !== $serie->getLastUse()->format('Y')) {
-					$serie->setCurrentNumber(1);
-				}
-			}
-
-			if ($serie->getResetBy() === 'M') {
-				if ($now->format('m') !== $serie->getLastUse()->format('m')) {
-					$serie->setCurrentNumber(1);
-				}
-			}
-
-			if ($serie->getResetBy() === 'D') {
-				if ($now->format('d') !== $serie->getLastUse()->format('d')) {
-					$serie->setCurrentNumber(1);
-				}
-			}
+		if ($serie->getLastUse() !== null &&
+			(
+				($serie->getResetBy() === 'Y' && $now->format('Y') !== $serie->getLastUse()->format('Y')) ||
+				($serie->getResetBy() === 'M' && $now->format('m') !== $serie->getLastUse()->format('m')) ||
+				($serie->getResetBy() === 'D' && $now->format('d') !== $serie->getLastUse()->format('d'))
+			)) {
+			$serie->setCurrentNumber(1);
 		}
 
 		$serie->setLastUse($now);

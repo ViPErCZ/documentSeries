@@ -40,7 +40,7 @@ final class AccountingYear extends Base {
 	/**
 	 * @param int|string $year
 	 */
-	public function setYear($year) {
+	public function setYear($year): void {
 		$this->year = new DateTime($year . '-01-01 00:00:00');
 	}
 
@@ -53,5 +53,22 @@ final class AccountingYear extends Base {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param int $id
+	 * @param int $year
+	 * @param bool $active
+	 * @param DateTime|null $insertDate
+	 * @return AccountingYear
+	 */
+	public static function create(int $id, int $year, bool $active, DateTime $insertDate = null): AccountingYear {
+		$accountingYear = new self();
+		$accountingYear->setId($id);
+		$accountingYear->setActive($active);
+		$accountingYear->setYear($year);
+		$accountingYear->setDateInserted($insertDate ?: new DateTime());
+
+		return $accountingYear;
 	}
 }

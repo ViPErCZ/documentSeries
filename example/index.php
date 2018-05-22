@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
 	$driverBuilder = new \ViPErCZ\DocumentSeries\Models\DriverBuilder(new \ViPErCZ\DocumentSeries\Models\Drivers\DriversList(), null);
@@ -31,6 +31,15 @@ try {
 		$number = $seriesOperator->generateNumber($actualSerieByAccountingYear);
 		echo 'NUMBER: ' . $number . PHP_EOL;
 	}
+
+	$accountingYear = \ViPErCZ\DocumentSeries\Entity\AccountingYear::create(3, 2020, true);
+	$accountingYear3 = $seriesOperator->getYear(new DateTime('2020-01-01 00:00:00'));
+	var_dump($accountingYear3);
+	$seriesOperator->insertAccountingYear($accountingYear);
+	$accountingYear3 = $seriesOperator->getYear(new DateTime('2020-01-01 00:00:00'));
+	var_dump($accountingYear3);
+
+	$seriesOperator->insertAccountingYear($accountingYear); // exception violation
 
 } catch (\ViPErCZ\DocumentSeries\DriverException $exception) {
 	echo $exception->getMessage() . PHP_EOL;

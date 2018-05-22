@@ -3,16 +3,17 @@
 namespace ViPErCZ\DocumentSeries\Models\Drivers\UnitTest;
 
 use DateTime;
+use ViPErCZ\DocumentSeries\DriverException;
 use ViPErCZ\DocumentSeries\Entity\AccountingYear;
 use ViPErCZ\DocumentSeries\Models\IAccountingYearModel;
 
 /**
- * Class AccountingYear
+ * Class AccountingYearModel
  * @package ViPErCZ\DocumentSeries\Models\Drivers\UnitTest
  */
 final class AccountingYearModel implements IAccountingYearModel {
 
-	/** @var array */
+	/** @var AccountingYear[] */
 	private $accountingYears = [];
 
 	/**
@@ -63,7 +64,6 @@ final class AccountingYearModel implements IAccountingYearModel {
 	 * @return null|AccountingYear
 	 */
 	public function getYear(DateTime $dateTime): ?AccountingYear {
-		/** @var AccountingYear $accountingYear */
 		foreach ($this->accountingYears as $accountingYear) {
 			if ($accountingYear->isActive() && $accountingYear->getYear() === $dateTime->format('Y')) {
 				return $accountingYear;
@@ -71,6 +71,32 @@ final class AccountingYearModel implements IAccountingYearModel {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param int $year
+	 * @return bool
+	 */
+	public function hasYear(int $year): bool {
+		foreach ($this->accountingYears as $accountingYear) {
+			if ((int)$accountingYear->getYear() === $year) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param AccountingYear $accountingYear
+	 * @throws DriverException
+	 */
+	public function insertAccountingYear(AccountingYear $accountingYear): void {
+		if ($this->hasYear($accountingYear->getYear())) {
+			throw new DriverException('Duplicate year ' . $accountingYear->getYear() . ' !');
+		}
+
+		$this->accountingYears[] = $accountingYear;
 	}
 
 }
